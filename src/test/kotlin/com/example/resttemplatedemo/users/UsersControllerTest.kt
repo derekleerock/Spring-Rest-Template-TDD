@@ -30,7 +30,7 @@ class UsersControllerTest {
 
     @Test
     fun getUsers_returnsUsers() {
-        stubUsersRepo.getAll_returnValue = arrayListOf(
+        stubUsersRepo.getAll_returnValue = listOf(
                 User(12, "cdavis", "charlie davis", "cdavis@jmail.com")
         )
 

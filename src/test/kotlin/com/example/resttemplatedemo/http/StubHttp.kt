@@ -2,12 +2,10 @@ package com.example.resttemplatedemo.http
 
 import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPIUser
 
-class SpyHttp : Http {
-    var get_argument_endpoint: String? = null
-        private set
+class StubHttp : Http {
+    var get_returnValue: List<JSONPlaceholderAPIUser> = listOf()
 
     override fun get(endpoint: String): List<JSONPlaceholderAPIUser> {
-        get_argument_endpoint = endpoint
-        return listOf()
+        return get_returnValue
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class UsersController(val usersRepo: UsersRepository) {
     @GetMapping
-    fun getAll(): ArrayList<User> {
+    fun getAll(): List<User> {
         return usersRepo.getAll()
     }
 }
