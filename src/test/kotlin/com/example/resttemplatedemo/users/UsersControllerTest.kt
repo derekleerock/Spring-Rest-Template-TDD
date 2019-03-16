@@ -11,11 +11,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 class UsersControllerTest {
     private lateinit var mockMvc: MockMvc
+    private lateinit var stubUsersRepo: StubUsersRepository
 
     @Before
     fun setUp() {
+        stubUsersRepo = StubUsersRepository()
+        val usersController = UsersController(stubUsersRepo)
         mockMvc = MockMvcBuilders
-                .standaloneSetup(UsersController())
+                .standaloneSetup(usersController)
                 .build()
     }
 
@@ -27,6 +30,10 @@ class UsersControllerTest {
 
     @Test
     fun getUsers_returnsUsers() {
+        stubUsersRepo.getAll_returnValue = arrayListOf(
+                User(12, "cdavis", "charlie davis", "cdavis@jmail.com")
+        )
+
         mockMvc.perform(get("/users"))
                 .andExpect(jsonPath("$[0].id", equalTo(12)))
                 .andExpect(jsonPath("$[0].username", equalTo("cdavis")))
