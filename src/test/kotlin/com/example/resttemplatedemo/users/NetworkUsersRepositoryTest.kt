@@ -7,7 +7,7 @@ import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPICompany
 import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPIGeo
 import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPIUser
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.*
+import org.junit.Assert.assertThat
 import org.junit.Test
 
 class NetworkUsersRepositoryTest {
@@ -30,26 +30,24 @@ class NetworkUsersRepositoryTest {
         val usersRepository = NetworkUsersRepository(stubHttp)
 
 
-        stubHttp.get_returnValue = listOf(
-                JSONPlaceholderAPIUser(
-                        id = 12,
-                        name = "Charlie Davis",
-                        username = "cdavis",
-                        emailAddress = "cdavis@jmail.com",
-                        address = JSONPlaceholderAPIAddress(
-                                street = "1 Main St",
-                                suite = "Suite 2B",
-                                city = "Boston",
-                                zipcode = "12345-6789",
-                                geo = JSONPlaceholderAPIGeo(lat = "77.7", lng = "99.9")
-                        ),
-                        phone = "703-555-1212",
-                        website = "http://www.google.com",
-                        company = JSONPlaceholderAPICompany(
-                                name = "ABC Mart",
-                                catchPhrase = "Here for you!",
-                                bs = "Interesting"
-                        )
+        stubHttp.get_returnValue = JSONPlaceholderAPIUser(
+                id = 12,
+                name = "Charlie Davis",
+                username = "cdavis",
+                emailAddress = "cdavis@jmail.com",
+                address = JSONPlaceholderAPIAddress(
+                        street = "1 Main St",
+                        suite = "Suite 2B",
+                        city = "Boston",
+                        zipcode = "12345-6789",
+                        geo = JSONPlaceholderAPIGeo(lat = "77.7", lng = "99.9")
+                ),
+                phone = "703-555-1212",
+                website = "http://www.google.com",
+                company = JSONPlaceholderAPICompany(
+                        name = "ABC Mart",
+                        catchPhrase = "Here for you!",
+                        bs = "Interesting"
                 )
         )
         val actualUsers = usersRepository.getAll()

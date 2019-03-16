@@ -1,16 +1,15 @@
 package com.example.resttemplatedemo.http
 
 import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPIUser
-import com.example.resttemplatedemo.users.User
 import org.springframework.stereotype.Component
 
 interface Http {
-    fun get(endpoint: String): List<JSONPlaceholderAPIUser>
+    fun get(endpoint: String): JSONPlaceholderAPIUser
 }
 
 @Component
 class NetworkHttp : Http {
-    override fun get(endpoint: String): List<JSONPlaceholderAPIUser> {
+    override fun get(endpoint: String): JSONPlaceholderAPIUser {
         TODO("not implemented")
     }
 }

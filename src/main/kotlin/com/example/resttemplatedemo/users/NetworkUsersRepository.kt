@@ -10,15 +10,15 @@ interface UsersRepository {
 @Repository
 class NetworkUsersRepository(val http: Http) : UsersRepository {
     override fun getAll(): List<User> {
-        val apiResponseUsers = http.get("https://jsonplaceholder.typicode.com/users")
+        val apiResponseUser = http.get("https://jsonplaceholder.typicode.com/users")
 
-        return apiResponseUsers.map { apiResponseUser ->
-            User(
-                    id = apiResponseUser.id,
-                    username = apiResponseUser.username,
-                    name = apiResponseUser.name,
-                    email = apiResponseUser.emailAddress
-            )
-        }
+        return listOf(
+                User(
+                        id = apiResponseUser.id,
+                        username = apiResponseUser.username,
+                        name = apiResponseUser.name,
+                        email = apiResponseUser.emailAddress
+                )
+        )
     }
 }
