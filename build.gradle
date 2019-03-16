@@ -35,3 +35,10 @@ compileTestKotlin {
 		jvmTarget = '1.8'
 	}
 }
+
+/// Output the results of tests as they are executed (command line).
+test {
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
