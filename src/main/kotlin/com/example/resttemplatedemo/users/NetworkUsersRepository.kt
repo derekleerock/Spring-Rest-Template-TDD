@@ -1,5 +1,6 @@
 package com.example.resttemplatedemo.users
 
+import com.example.resttemplatedemo.http.Http
 import org.springframework.stereotype.Repository
 
 interface UsersRepository {
@@ -7,8 +8,9 @@ interface UsersRepository {
 }
 
 @Repository
-class NetworkUsersRepository : UsersRepository {
+class NetworkUsersRepository(val http: Http) : UsersRepository {
     override fun getAll(): ArrayList<User> {
-        TODO("not implemented")
+        http.get("https://jsonplaceholder.typicode.com/users")
+        return arrayListOf()
     }
 }
