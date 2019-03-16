@@ -20,7 +20,7 @@ class NetworkUsersRepositoryTest {
         usersRepository.getAll()
 
 
-        val expectedEndpoint = "https://jsonplaceholder.typicode.com/users"
+        val expectedEndpoint = "https://jsonplaceholder.typicode.com/users/8"
         assertThat(spyHttp.get_argument_endpoint, equalTo(expectedEndpoint))
     }
 
