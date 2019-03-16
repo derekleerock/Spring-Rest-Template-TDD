@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/users")
 class UsersController {
     @GetMapping
-    fun getAll() {
-
+    fun getAll(): User {
+        return User(12, "cdavis", "charlie davis", "cdavis@jmail.com")
     }
 }
