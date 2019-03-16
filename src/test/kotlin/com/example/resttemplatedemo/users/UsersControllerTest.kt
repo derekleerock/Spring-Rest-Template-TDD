@@ -25,9 +25,9 @@ class UsersControllerTest {
                 .build()
 
         mockMvc.perform(get("/users"))
-                .andExpect(jsonPath("$.id", equalTo(12)))
-                .andExpect(jsonPath("$.username", equalTo("cdavis")))
-                .andExpect(jsonPath("$.name", equalTo("charlie davis")))
-                .andExpect(jsonPath("$.email", equalTo("cdavis@jmail.com")))
+                .andExpect(jsonPath("$[0].id", equalTo(12)))
+                .andExpect(jsonPath("$[0].username", equalTo("cdavis")))
+                .andExpect(jsonPath("$[0].name", equalTo("charlie davis")))
+                .andExpect(jsonPath("$[0].email", equalTo("cdavis@jmail.com")))
     }
 }
