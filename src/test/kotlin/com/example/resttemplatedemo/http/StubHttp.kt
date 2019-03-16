@@ -1,10 +1,7 @@
 package com.example.resttemplatedemo.http
 
-import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPIUser
-
-class StubHttp : Http {
-    lateinit var get_returnValue: JSONPlaceholderAPIUser
-    override fun get(endpoint: String): JSONPlaceholderAPIUser {
+class StubHttp<T>(var get_returnValue: T) : Http<T> {
+    override fun get(endpoint: String): T {
         return get_returnValue
     }
 }
