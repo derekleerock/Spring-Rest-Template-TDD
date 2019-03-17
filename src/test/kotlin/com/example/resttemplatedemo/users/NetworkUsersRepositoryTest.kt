@@ -25,6 +25,20 @@ class NetworkUsersRepositoryTest {
     }
 
     @Test
+    fun getAll_passes_the_expected_class_type() {
+        val spyHttp = SpyHttp(
+                ExternalAPIHttpResponse(JSONPlaceholderAPIUserFixture.empty)
+        )
+        val usersRepository = NetworkUsersRepository(spyHttp)
+
+
+        usersRepository.getAll()
+
+
+        assertThat(spyHttp.get_argument_responseBodyClassType, equalTo(JSONPlaceholderAPIUser::class.java))
+    }
+
+    @Test
     fun getAll_returnsUsers() {
         val stubHttp = StubHttp(
                 ExternalAPIHttpResponse(

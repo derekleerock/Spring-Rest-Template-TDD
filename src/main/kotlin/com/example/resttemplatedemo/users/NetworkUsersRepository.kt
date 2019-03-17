@@ -11,7 +11,10 @@ interface UsersRepository {
 @Repository
 class NetworkUsersRepository(val http: Http<JSONPlaceholderAPIUser>) : UsersRepository {
     override fun getAll(): List<User> {
-        val externalHttpResponse = http.get("https://jsonplaceholder.typicode.com/users/8")
+        val externalHttpResponse = http.get(
+                "https://jsonplaceholder.typicode.com/users/8",
+                JSONPlaceholderAPIUser::class.java
+        )
 
         val apiResponseUser = externalHttpResponse.value
 
