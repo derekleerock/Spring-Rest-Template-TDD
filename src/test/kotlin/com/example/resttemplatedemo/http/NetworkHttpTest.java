@@ -19,7 +19,7 @@ public class NetworkHttpTest {
         ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
         doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
 
-        when(mockResponseEntity.getBody()).thenReturn("Sample response");
+        when(mockResponseEntity.getBody()).thenReturn("");
 
         NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
 
@@ -38,7 +38,7 @@ public class NetworkHttpTest {
         ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
         doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
 
-        when(mockResponseEntity.getBody()).thenReturn("Sample response");
+        when(mockResponseEntity.getBody()).thenReturn("");
 
         NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
 
