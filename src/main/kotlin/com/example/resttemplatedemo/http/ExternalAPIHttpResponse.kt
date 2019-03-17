@@ -1,3 +1,13 @@
 package com.example.resttemplatedemo.http
 
-data class ExternalAPIHttpResponse<T>(val value: T)
+class ExternalAPIHttpResponse<T> private constructor(val value: T?, val errorMessage: String?) {
+    companion object {
+        fun <T> Success(value: T): ExternalAPIHttpResponse<T> {
+            return ExternalAPIHttpResponse(value, null)
+        }
+
+        fun <T> Failure(errorMessage: String): ExternalAPIHttpResponse<T> {
+            return ExternalAPIHttpResponse(null, errorMessage)
+        }
+    }
+}

@@ -4,10 +4,11 @@ import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPICompany
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -85,5 +86,23 @@ public class NetworkHttpTest {
 
 
         assertThat(response.getValue(), equalTo("Sample Response"));
+    }
+
+    @Test
+    public void get_handles_bad_request() {
+        RestTemplate mockRestTemplate = mock(RestTemplate.class);
+        ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
+        doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
+
+        when(mockResponseEntity.getStatusCode()).thenReturn(HttpStatus.BAD_REQUEST);
+
+        NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
+
+
+        ExternalAPIHttpResponse<String> response = networkHttp.get("", String.class);
+
+
+        assertThat(response.getValue(), is(nullValue()));
+        assertThat(response.getErrorMessage(), equalTo("Bad Request"));
     }
 }

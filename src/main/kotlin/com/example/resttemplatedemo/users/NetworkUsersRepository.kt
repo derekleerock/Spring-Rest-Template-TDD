@@ -16,15 +16,19 @@ class NetworkUsersRepository(val http: Http<JSONPlaceholderAPIUser>) : UsersRepo
                 JSONPlaceholderAPIUser::class.java
         )
 
-        val apiResponseUser = externalHttpResponse.value
+        val maybeApiResponseUser = externalHttpResponse.value
 
-        return listOf(
-                User(
-                        id = apiResponseUser.id,
-                        username = apiResponseUser.username,
-                        name = apiResponseUser.name,
-                        email = apiResponseUser.emailAddress
-                )
-        )
+        maybeApiResponseUser?.let {
+            return listOf(
+                    User(
+                            id = it.id,
+                            username = it.username,
+                            name = it.name,
+                            email = it.emailAddress
+                    )
+            )
+        }
+
+        return listOf()
     }
 }
