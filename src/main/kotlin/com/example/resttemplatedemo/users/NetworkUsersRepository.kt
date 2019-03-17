@@ -24,7 +24,7 @@ class NetworkUsersRepository(val http: Http<JSONPlaceholderAPIUser>) : UsersRepo
                             id = it.id,
                             username = it.username,
                             name = it.name,
-                            email = it.emailAddress
+                            email = it.email
                     )
             )
         }

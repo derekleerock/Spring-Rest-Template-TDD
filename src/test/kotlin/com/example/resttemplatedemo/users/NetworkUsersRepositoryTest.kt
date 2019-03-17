@@ -46,7 +46,7 @@ class NetworkUsersRepositoryTest {
                                 id = 12,
                                 name = "Charlie Davis",
                                 username = "cdavis",
-                                emailAddress = "cdavis@jmail.com",
+                                email = "cdavis@jmail.com",
                                 address = JSONPlaceholderAPIAddress(
                                         street = "1 Main St",
                                         suite = "Suite 2B",

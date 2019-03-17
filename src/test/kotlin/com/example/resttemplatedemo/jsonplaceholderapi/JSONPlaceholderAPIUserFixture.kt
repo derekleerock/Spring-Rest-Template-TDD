@@ -8,7 +8,7 @@ class JSONPlaceholderAPIUserFixture {
                         id = -1,
                         name = "",
                         username = "",
-                        emailAddress = "",
+                        email = "",
                         address = JSONPlaceholderAPIAddress(
                                 street = "",
                                 suite = "",
