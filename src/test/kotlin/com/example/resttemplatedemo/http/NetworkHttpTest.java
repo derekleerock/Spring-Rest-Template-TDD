@@ -1,5 +1,6 @@
 package com.example.resttemplatedemo.http;
 
+import com.example.resttemplatedemo.jsonplaceholderapi.JSONPlaceholderAPICompany;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.http.HttpMethod;
@@ -48,5 +49,24 @@ public class NetworkHttpTest {
         ArgumentCaptor<HttpMethod> httpMethodArgumentCaptor = ArgumentCaptor.forClass(HttpMethod.class);
         verify(mockRestTemplate).exchange(anyString(), httpMethodArgumentCaptor.capture(), any(), (Class<?>) any());
         assertThat(httpMethodArgumentCaptor.getValue(), equalTo(HttpMethod.GET));
+    }
+
+    @Test
+    public void get_requests_response_type_matching_specified_class() {
+        RestTemplate mockRestTemplate = mock(RestTemplate.class);
+        ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
+        doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
+
+        when(mockResponseEntity.getBody()).thenReturn("");
+
+        NetworkHttp<JSONPlaceholderAPICompany> networkHttp = new NetworkHttp<>(mockRestTemplate);
+
+
+        networkHttp.get("", JSONPlaceholderAPICompany.class);
+
+
+        ArgumentCaptor<Class> classArgumentCaptor = ArgumentCaptor.forClass(Class.class);
+        verify(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) classArgumentCaptor.capture());
+        assertThat(classArgumentCaptor.getValue(), equalTo(JSONPlaceholderAPICompany.class));
     }
 }
