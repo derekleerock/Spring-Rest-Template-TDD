@@ -69,4 +69,21 @@ public class NetworkHttpTest {
         verify(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) classArgumentCaptor.capture());
         assertThat(classArgumentCaptor.getValue(), equalTo(JSONPlaceholderAPICompany.class));
     }
+
+    @Test
+    public void get_returns_response_as_string() {
+        RestTemplate mockRestTemplate = mock(RestTemplate.class);
+        ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
+        doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
+
+        when(mockResponseEntity.getBody()).thenReturn("Sample Response");
+
+        NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
+
+
+        ExternalAPIHttpResponse<String> response = networkHttp.get("", String.class);
+
+
+        assertThat(response.getValue(), equalTo("Sample Response"));
+    }
 }
