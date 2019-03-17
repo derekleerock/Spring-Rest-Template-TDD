@@ -14,7 +14,7 @@ class NetworkHttp<T>(val restTemplate: RestTemplate) : Http<T> {
     override fun get(endpoint: String, responseBodyClassType: Class<T>): ExternalAPIHttpResponse<T> {
         val responseEntity = restTemplate.exchange<T>(
                 endpoint,
-                HttpMethod.POST,
+                HttpMethod.GET,
                 HttpEntity(""),
                 responseBodyClassType
         )

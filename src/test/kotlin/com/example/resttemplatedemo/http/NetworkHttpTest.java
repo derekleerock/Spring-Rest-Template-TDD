@@ -2,7 +2,7 @@ package com.example.resttemplatedemo.http;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,7 +18,7 @@ public class NetworkHttpTest {
         ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
         doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
 
-        when(mockResponseEntity.getBody()).thenReturn("Sample responsne");
+        when(mockResponseEntity.getBody()).thenReturn("Sample response");
 
         NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
 
@@ -29,5 +29,24 @@ public class NetworkHttpTest {
         ArgumentCaptor<String> urlArgumentCaptor = ArgumentCaptor.forClass(String.class);
         verify(mockRestTemplate).exchange(urlArgumentCaptor.capture(), any(), any(), (Class<?>) any());
         assertThat(urlArgumentCaptor.getValue(), equalTo("/someresource/12345"));
+    }
+
+    @Test
+    public void get_makes_http_method_get_request() {
+        RestTemplate mockRestTemplate = mock(RestTemplate.class);
+        ResponseEntity mockResponseEntity = mock(ResponseEntity.class);
+        doReturn(mockResponseEntity).when(mockRestTemplate).exchange(anyString(), any(), any(), (Class<?>) any());
+
+        when(mockResponseEntity.getBody()).thenReturn("Sample response");
+
+        NetworkHttp<String> networkHttp = new NetworkHttp<>(mockRestTemplate);
+
+
+        networkHttp.get("", String.class);
+
+
+        ArgumentCaptor<HttpMethod> httpMethodArgumentCaptor = ArgumentCaptor.forClass(HttpMethod.class);
+        verify(mockRestTemplate).exchange(anyString(), httpMethodArgumentCaptor.capture(), any(), (Class<?>) any());
+        assertThat(httpMethodArgumentCaptor.getValue(), equalTo(HttpMethod.GET));
     }
 }
